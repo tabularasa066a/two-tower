@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Virtual Environment
+.venv/
+
+models/*
+!models/.gitkeep
+!models/best_model_info.json
+
+!data
+data/*
+!data/processed
+data/processed/*
+!data/processed/.gitkeep
