@@ -3,6 +3,10 @@
 ### 参考記事
 [参考](https://note.com/kokopelli_inc/n/nd89c1b89b741)
 
+### 
+- ANN（近似最近傍探索）
+- [Embedding（埋め込み）](https://zenn.dev/peishim/articles/c696ff85a539bd)
+
 ## Python仮想環境の構築
 ### 環境作成
 ```bash
@@ -51,18 +55,36 @@ pip freeze > requirements.txt
     └── embeddings/             # 埋め込みベクトルの保存先
 ```
 
-### 生データセットの構造
-#### users.dat
+### データセットの構造
+#### ユーザ一覧
 ```bash
+# users.dat
 UserID::Gender::Age::Occupation::Zip-code
 ```
-
-#### movies.dat
+↓（前処理で変換）↓
 ```bash
-MovieID::Title::Genres
+# users.csv
+user_id,gender,age,occupation
 ```
 
-#### ratings.dat
+#### 映画一覧
 ```bash
+# movies.dat
+MovieID::Title::Genres
+```
+↓（前処理で変換）↓
+```bash
+# items.csv
+item_id,title,genre_Action,genre_Adventure,genre_Animation,genre_Children's,genre_Comedy,genre_Crime,genre_Documentary,genre_Drama,genre_Fantasy,genre_Film-Noir,genre_Horror,genre_Musical,genre_Mystery,genre_Romance,genre_Sci-Fi,genre_Thriller,genre_War,genre_Western
+```
+
+#### ユーザー映画評価一覧
+```bash
+# ratings.dat
 UserID::MovieID::Rating::Timestamp
+```
+↓（前処理で変換）↓
+```bash
+# interactions.csv
+user_id,item_id,rating,timestamp,gender,age,occupation,genre_Action,genre_Adventure,genre_Animation,genre_Children's,genre_Comedy,genre_Crime,genre_Documentary,genre_Drama,genre_Fantasy,genre_Film-Noir,genre_Horror,genre_Musical,genre_Mystery,genre_Romance,genre_Sci-Fi,genre_Thriller,genre_War,genre_Western
 ```
