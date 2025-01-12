@@ -7,10 +7,27 @@
 - ANN（近似最近傍探索）
 - [Embedding（埋め込み）](https://zenn.dev/peishim/articles/c696ff85a539bd)
 
-## Python仮想環境の構築
+## 実行方法
+```bash
+# 以下３コマンドは初回のみ
+pytohn3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 仮想環境有効化
+source .venv/bin/activate
+# 学習実行
+python train.py
+# 推論実行
+python recommend.py
+# 評価
+python evaluate.py
+```
+
+## Python環境構築覚書
 ### 環境作成
 ```bash
-# .venvという名称の仮想環境を構築
+# `.venv`という名称の仮想環境を構築
 pytohn3 -m venv .venv
 ```
 
@@ -26,7 +43,6 @@ deactivate
 ## ライブラリ群のインストール
 ```bash
 pip install -r requirements.txt
-pip install numpy scikit-learn jupyter
 ```
 
 ### pipインストールしたもの一覧をrequirements.txtに吐き出す
