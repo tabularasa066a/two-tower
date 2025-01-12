@@ -4,7 +4,7 @@ import torch.nn as nn
 class MLPTower(nn.Module):
     """
     カテゴリカルな特徴量と数値特徴量を受け取り、
-    固定次元の埋め込みベクトルを出力するMLP（多層パーセプトロン）モデル
+    固定次元の埋め込みベクトルを出力するMLP（多層パーセプトロン, Multi Layer Perceptron）モデル
     """
 
     def __init__(

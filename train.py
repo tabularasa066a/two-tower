@@ -15,7 +15,7 @@ from tqdm.notebook import tqdm
 # 別ファイルに（two_tower.py）に定義したTwoTowerModelクラスをimport
 from two_tower import TwoTowerModel
 from mlp_tower import MLPTower
-
+from movie_lens_dataset import MovieLensDataset
 
 def preprocess_movielens_data(
         path_raw: Path, path_processed: Path
@@ -88,46 +88,6 @@ def preprocess_movielens_data(
     print(f"\nData saved: {path_processed / 'users.csv'}")
     print(f"Data saved: {path_processed / 'items.csv'}")
     print(f"Data saved: {path_processed / 'interactions.csv'}")
-
-
-class MovieLensDataset(Dataset):
-    """MovieLensデータセット用のカスタムデータセット
-
-    ユーザーとアイテムの特徴量、および評価値を保持し、
-    バッチ学習用のテンソルを提供します。
-    """
-    def __init__(self, df: pd.DataFrame) -> None:
-        self.length = len(df)
-        self.genre_columns = [col for col in df.columns if col.startswith("genre_")]
-
-        # 特徴量の定義
-        self.user_categorical_columns = ["gender", "occupation"]
-        self.user_numerical_columns = ["age"]
-        self.item_numerical_columns = self.genre_columns
-
-        # テンソルへの変換
-        self.user_categorical_features = torch.tensor(
-            df[self.user_categorical_columns].values, dtype=torch.int32
-        )
-        self.user_numerical_features = torch.tensor(
-            df[self.user_numerical_columns].values, dtype=torch.float32
-        )
-        self.item_numerical_features = torch.tensor(
-            df[self.item_numerical_columns].values, dtype=torch.float32
-        )
-        self.rating = torch.tensor(df["rating"].values, dtype=torch.float32)
-
-    def __len__(self) -> int:
-        return self.length
-
-    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
-        return {
-            "user_categorical_features": self.user_categorical_features[idx],
-            "user_numerical_features": self.user_numerical_features[idx],
-            "item_numerical_features": self.item_numerical_features[idx],
-            "rating": self.rating[idx],
-        }
-
 
 def train_model(
     model: TwoTowerModel,
