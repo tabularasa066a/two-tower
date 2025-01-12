@@ -1,11 +1,12 @@
 # Two-Towerモデルを用いたレコメンデーションエンジンの構築
-## Two-Towerモデル
-### 参考記事
+## Two-Towerモデルを使ったレコメンデーションエンジンの構築
+### 実装参考
 [参考](https://note.com/kokopelli_inc/n/nd89c1b89b741)
 
-### 
+### その他参考
 - ANN（近似最近傍探索）
 - [Embedding（埋め込み）](https://zenn.dev/peishim/articles/c696ff85a539bd)
+- [PyTorchにおける.train(),.eval()メソッドの使い方](https://nikkie-ftnext.hatenablog.com/entry/what-are-torch-nn-module-train-method-and-eval-method)
 
 ## 実行方法
 ```bash
