@@ -6,7 +6,6 @@ __pycache__/
 
 models/*
 !models/.gitkeep
-!models/best_model_info.json
 
 !data
 data/*

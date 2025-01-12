@@ -90,9 +90,9 @@ if __name__ == "__main__":
 
     # テスト用のユーザーデータ
     test_user = {
-        "gender": "F",
-        "age": 25,
-        "occupation": 4  # 例：学生
+        "gender": "M",
+        "age": 33,
+        "occupation": 12  # 例：プログラマ
     }
 
     # レコメンド生成
