@@ -50,10 +50,7 @@ class MLPTower(nn.Module):
     ) -> torch.Tensor:
         # カテゴリカル特徴量の埋め込み
         if categorical_features is not None and len(self.embeddings) > 0:
-            embedded = [
-                embedding(categorical_features[:, i])
-                for i, embedding in enumerate(self.embeddings)
-            ]
+            embedded = [embedding(categorical_features[:, i]) for i, embedding in enumerate(self.embeddings)]
             embedded = torch.cat(embedded, dim=1)
             x = torch.cat([embedded, numerical_features], dim=1)
         else:
