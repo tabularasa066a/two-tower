@@ -329,6 +329,7 @@ if __name__ == "__main__":
         output_dim=32,
     )
     model = TwoTowerModel(user_tower, item_tower)
+    print(f"モデルパラメタ数：{len(list(model.parameters()))}")
 
     # チェックポイントの確認と読み込み
     checkpoint_path = Path("./models/best_model.pth")
