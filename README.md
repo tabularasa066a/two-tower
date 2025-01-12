@@ -37,12 +37,15 @@ pip freeze > requirements.txt
 ### プロジェクトディレクトリ構成
 ```bash
 .
-├── train.py
-├── recommend.py
-├── evaluate.py
-├── mlp_tower.py
-├── two_tower.py
+│
+├── train.py                    # 学習・モデル生成実行
+├── recommend.py                # 推論実行
+├── evaluate.py                 # 推論結果の評価
+├── mlp_tower.py                # Two-Towerで用いるDNN部を定義
+├── two_tower.py                # Two-Towerモデル本体
+├── movie_lens_dataset.py       # MovieLensのデータセットをPyTorchで扱えるよう変換するクラス
 ├── test_pytorch.py             # PyTorchの動作確認用 
+├── reset.sh                    # 学習済みデータを削除 
 ├── data/
 │   ├── raw/
 │   │    └── movielens-1m/      # 生データ（事前にダウンロードして配置）
