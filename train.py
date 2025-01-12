@@ -10,7 +10,9 @@ from torch.utils.data import DataLoader, Dataset
 import faiss
 import numpy as np
 import pandas as pd
-from tqdm.notebook import tqdm
+## TQDM（プログレスバーの表示）はjupyter使う際は下のほうを代わりにコメントイン
+from tqdm import tqdm
+# from tqdm.notebook import tqdm
 
 # 別ファイルに（two_tower.py）に定義したTwoTowerModelクラスをimport
 from two_tower import TwoTowerModel
