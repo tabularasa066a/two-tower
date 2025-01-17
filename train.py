@@ -6,7 +6,7 @@ from pathlib import Path
 # ref: https://github.com/pytorch/pytorch/issues/31409
 import torch
 import torch.nn.functional as F
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, random_split
 import faiss
 import numpy as np
 import pandas as pd
@@ -81,15 +81,23 @@ def preprocess_movielens_data(
         )
     ).drop(columns=["title"])
 
+    # データの分割とシャッフル
+    df_interactions = df_interactions.sample(frac=1, random_state=42).reset_index(drop=True)
+    train_size = int(0.8 * len(df_interactions))
+    df_interactions_train = df_interactions[:train_size]
+    df_interactions_test = df_interactions[train_size:]
+
     # 前処理済みデータの保存
     path_processed.mkdir(parents=True, exist_ok=True)
     df_users.to_csv(path_processed / "users.csv", index=False)
     df_items.to_csv(path_processed / "items.csv", index=False)
-    df_interactions.to_csv(path_processed / "interactions.csv", index=False)
+    df_interactions_train.to_csv(path_processed / "interactions_train.csv", index=False)
+    df_interactions_test.to_csv(path_processed / "interactions_test.csv", index=False)
 
     print(f"\nData saved: {path_processed / 'users.csv'}")
     print(f"Data saved: {path_processed / 'items.csv'}")
-    print(f"Data saved: {path_processed / 'interactions.csv'}")
+    print(f"Data saved: {path_processed / 'interactions_train.csv'}")
+    print(f"Data saved: {path_processed / 'interactions_test.csv'}")
 
 def train_model(
     model: TwoTowerModel,
@@ -310,9 +318,12 @@ if __name__ == "__main__":
     path_processed = Path("./data/processed/movielens-1m")
     preprocess_movielens_data(path_raw, path_processed)
 
-    df = pd.read_csv(path_processed / "interactions.csv")
+    df = pd.read_csv(path_processed / "interactions_train.csv")
 
     dataset = MovieLensDataset(df)
+
+    NUM_EPOCHS: int = 100
+    BATCH_SIZE: int = 512
 
     # モデルの構築
     user_tower = MLPTower(
@@ -356,8 +367,8 @@ if __name__ == "__main__":
     history = train_model(
         model=model,
         dataset=dataset,
-        n_epochs=5,
-        batch_size=512,
+        n_epochs=NUM_EPOCHS,
+        batch_size=BATCH_SIZE,
         device=get_device(),
     )
 

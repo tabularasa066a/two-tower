@@ -51,6 +51,12 @@ pip install -r requirements.txt
 pip freeze > requirements.txt
 ```
 
+### WSL上でグラフ表示できるようにする
+```bash
+sudo apt install imagemagick python3-tk -y
+```
+[参考](https://touch-sp.hatenablog.com/entry/2021/04/23/082702)
+
 ### プロジェクトディレクトリ構成
 ```bash
 .

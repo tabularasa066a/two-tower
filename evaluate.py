@@ -154,9 +154,9 @@ if __name__ == "__main__":
     # インデックスの読み込み
     item_index = load_faiss_index(index_path)
 
-    # テストデータの読み込み（本来は別に用意しておくべきだが、今回は動作確認用に全データを用いる。）
+    # テストデータの読み込み
     path_processed = Path("./data/processed/movielens-1m")
-    df_test = pd.read_csv(path_processed / "interactions.csv")
+    df_test = pd.read_csv(path_processed / "interactions_test.csv")
 
     # モデルの評価
     metrics = evaluate_model(
