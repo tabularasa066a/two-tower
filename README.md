@@ -57,6 +57,11 @@ sudo apt install imagemagick python3-tk -y
 ```
 [参考](https://touch-sp.hatenablog.com/entry/2021/04/23/082702)
 
+### CSVの行数をカウント
+```bash
+wc -l hoge.csv
+```
+
 ### プロジェクトディレクトリ構成
 ```bash
 .

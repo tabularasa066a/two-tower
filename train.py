@@ -6,7 +6,8 @@ from pathlib import Path
 # ref: https://github.com/pytorch/pytorch/issues/31409
 import torch
 import torch.nn.functional as F
-from torch.utils.data import DataLoader, Dataset, random_split
+from torch.utils.data import DataLoader, Dataset
+from sklearn.model_selection import train_test_split
 import faiss
 import numpy as np
 import pandas as pd
@@ -82,10 +83,7 @@ def preprocess_movielens_data(
     ).drop(columns=["title"])
 
     # データの分割とシャッフル
-    df_interactions = df_interactions.sample(frac=1, random_state=42).reset_index(drop=True)
-    train_size = int(0.8 * len(df_interactions))
-    df_interactions_train = df_interactions[:train_size]
-    df_interactions_test = df_interactions[train_size:]
+    df_interactions_train, df_interactions_test = train_test_split(df_interactions, test_size=0.2, random_state=42)
 
     # 前処理済みデータの保存
     path_processed.mkdir(parents=True, exist_ok=True)
